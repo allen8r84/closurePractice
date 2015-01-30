@@ -112,7 +112,7 @@ var outerFunction = function(cb){
     return function(n){
         if(x < n){
             for (x = 0; x < n; x++) {
-                cb();
+                cb(x);
             }
             console.log('STAHHP')
         }
@@ -120,3 +120,48 @@ var outerFunction = function(cb){
 };
 
 var innerFunction = outerFunction(callBack);
+
+
+//3rd attempt after clarification...
+/*var inner = outer(cb, 3);
+inner(); //works
+inner(); //works
+inner(); //works
+inner(); //returns undefined*/
+//first part...
+var callBack = function() {
+    console.log("this only works once");
+};
+var outerFunction = function(cb) {
+    var x = 0;
+    return function(){
+        if (x === 0) {
+            x++;
+            cb();
+        } else {
+            return undefined;
+        };
+    };
+};
+var innerFunction = outerFunction(callBack);
+
+
+//second part...
+var callBack = function() {
+    console.log("this will now display every time it is called until you see \"STAHHP\" by it\'s lonesome");
+};
+var outerFunction = function(cb, n) {
+    var x = 0;
+    return function(){
+        if (x < n) {
+            x++;
+            cb();
+        }else if (x === n) {
+            x++;
+            console.log('STAHHP')
+        } else {
+            return undefined;
+        };
+    };
+};
+var innerFunction = outerFunction(callBack, 6);

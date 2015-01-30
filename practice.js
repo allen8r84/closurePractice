@@ -46,6 +46,14 @@ outer("435-215-9248");
 */
 
   //Code Here
+ var makeCounter = function() {
+     var x = 0;
+     return function (){
+         x++;
+         return console.log(x)
+     }
+ } 
+  
   var count = makeCounter();
   count() // 1
   count() // 2
@@ -54,7 +62,7 @@ outer("435-215-9248");
 
 
 
-//Next Problem
+//#4  ===  Next Problem
 
 
 

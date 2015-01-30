@@ -73,6 +73,50 @@ outer("435-215-9248");
   After the function has been called N number of times, console.log('STAHHP');
 */
 
+//first part.....
+var callBack = function(){
+    console.log("this only works once");
+}
+var outerFunction = function(cb){
+    return function(){
+        cb();
+    }
+};
 
+var innerFunction = outerFunction(callBack);
 
+//second part....
+var callBack = function(y){
+    console.log(y);
+}
+var outerFunction = function(cb){
+    var x = 0;
+    return function(n){
+        if(x < n) {
+            x++;
+            cb(x);
+        } else {
+            console.log('STAHHP')
+        }
+    }
+};
 
+var innerFunction = outerFunction(callBack);
+
+//2nd part 2nd try....
+var callBack = function(y){
+    console.log(y);
+}
+var outerFunction = function(cb){
+    var x = 0;
+    return function(n){
+        if(x < n){
+            for (x = 0; x < n; x++) {
+                cb();
+            }
+            console.log('STAHHP')
+        }
+    }
+};
+
+var innerFunction = outerFunction(callBack);
